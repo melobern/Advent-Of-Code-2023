@@ -6,39 +6,40 @@
 /*   By: mbernard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 12:36:08 by mbernard          #+#    #+#             */
-/*   Updated: 2023/12/10 13:35:43 by mbernard         ###   ########.fr       */
+/*   Updated: 2023/12/10 14:54:31 by mbernard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int	ft_count_time(int speed, int distance)
+int	ft_count_time(int time, int speed, int distance)
 {
-	int	time;
+	int	time_t;
+	int	passed;
 
-	time = 0;
-	while (speed < distance - speed)
+	time_t = speed;
+	passed = 0;
+	while (time_t < time)
 	{
-		speed += speed;
-		time++;
-		printf("speed : %i\ttime: %i\n", speed, time);
+		passed += speed;
+		time_t++;
 	}
-	printf("Final time: %i\n", time);
-	return (time);
+	return (passed);
 }
-int	ft_count_solutions(int record, int distance)
+
+int	ft_count_solutions(int time, int distance)
 {
-	int	time;
+	int	passed;
 	int	speed;
 	int	solutions;
 
-	time = 0;
+	passed = 0;
 	speed = 0;
 	solutions = 0;
 	while (++speed < distance)
 	{
-		time = ft_count_time(speed, distance);
-		if (time > 0 && time < record)
+		passed = ft_count_time(time, speed, distance);
+		if (passed > distance)
 			solutions++;
 	}
 	return (solutions);
@@ -46,14 +47,17 @@ int	ft_count_solutions(int record, int distance)
 
 int	main(void)
 {
-	int	first = ft_count_solutions(7, 9);
-	int	second = ft_count_solutions(15, 40);
-	int	thirst = ft_count_solutions(30, 200);
-	int	result = first * second * thirst;
+	int	one;
+	int	two;
+	int	three;
+	int	four;
+	int	res;
 
-	printf("First %i\n", first);
-	printf("Second %i\n", second);
-	printf("Thirst %i\n", thirst);
-	printf("Result %i\n", result);
+	one = ft_count_solutions(52, 426);
+	two = ft_count_solutions(94, 1374);
+	three = ft_count_solutions(75, 1279);
+	four = ft_count_solutions(94, 1216);
+	res = one * two * three * four;
+	printf("Result : %i\n", res);
 	return (0);
 }
