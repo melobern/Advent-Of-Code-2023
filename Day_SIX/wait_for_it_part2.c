@@ -14,8 +14,8 @@
 
 long long	ft_count_time(long long time, long long speed, long long distance)
 {
-	int	time_t;
-	int	passed;
+	long long	time_t;
+	long long	passed;
 
 	time_t = speed;
 	passed = 0;
@@ -31,17 +31,15 @@ int	ft_count_solutions(long long time, long long distance)
 {
 	long long	passed;
 	long long	speed;
-	int			solutions;
+	long long	solutions;
 
 	passed = 0;
 	speed = 0;
-	solutions = 0;
-	while (++speed < distance)
-	{
-		passed = ft_count_time(time, speed, distance);
-		if (passed > distance)
-			solutions++;
-	}
+	solutions = time - 1;
+	while (ft_count_time(time, solutions, distance) < distance)
+		solutions--;
+	while (ft_count_time(time, ++speed, distance) < distance)
+		solutions--;
 	return (solutions);
 }
 
@@ -49,6 +47,7 @@ int	main(void)
 {
 	int	race;
 
+	//race = ft_count_solutions(71530, 940200);
 	race = ft_count_solutions(52947594, 426137412791216);
 	printf("Result : %i\n", race);
 	return (0);
